@@ -1,82 +1,89 @@
 import React, { useState } from 'react';
-import moment from 'moment'
-import { SingleDatePicker } from 'react-dates'
+import moment from 'moment';
 import 'react-dates/initialize';
+import { SingleDatePicker } from 'react-dates';
+import 'react-dates/lib/css/_datepicker.css';
 
-import 'react-dates/lib/css/_datepicker.css'
-
-const ExpenseForm = (props) => {
-	//const [description, setDescription] = useState({description: ''});
-	const [form, setState] = useState({
-		description: '',
-		note: '',
-		amount: '',
-		createdAt: moment(),
-		focusedCalendar: false
-	})
-
-
-	//console.log(moment().format("MMM Do, YYYY"))
+const ExpenseForm = () => {
+	const [description, setDescription] = useState('');
+	const [note, setNote] = useState('');
+	const [amount, setAmount] = useState('');
+	const [createdAt, setCreatedAt] = useState(moment());
+	const [focusedCalendar, setFocusedCalendar] = useState(false);
+	const [error, setError] = useState('')
 
 	const onDescriptionChange = (e) => {
 		const newDescription = e.target.value;
 
-
-		setState({ ...form, description: newDescription });
+		setDescription(newDescription);
 	};
 
 	const onNoteChange = (e) => {
-		const newNote = e.target.value
-		setState({ ...form, note: newNote })
-	}
+		const newNote = e.target.value;
+		setNote(newNote);
+	};
 
-	const onNumChange = (e) => {
-		const newAmount = e.target.value
-		if (newAmount.match(/^\d*(\.\d{0,2})?$/)) {
-			return setState({ ...form, amount: newAmount })
+	const onAmountChange = (e) => {
+		const newAmount = e.target.value;
+		if (!newAmount || newAmount.match(/^\d{1,}(\.\d{0,2})?$/)) {
+			return setAmount(newAmount);
 		}
-
-	}
+	};
 
 	const onDateChange = (createdAt) => {
-		setState({ ...form, createdAt })
-
-	}
+		if (createdAt) {
+			setCreatedAt(createdAt);
+		}
+	};
 	const onFocusCalendar = ({ focused }) => {
-		setState({ ...form, focusedCalendar: focused })
+		setFocusedCalendar(focused);
+	};
+
+	const onSubmitHandler = (e)=>{
+		e.preventDefault()
+		if(!description || !amount){
+			setError('Please provide description and amount!')
+		} else {
+			setError('')
+			console.log('submitted')
+
+		}
 	}
 
 	return (
 		<div>
-			<form>
+		  {error && <p>{error}</p>}
+			<form onSubmit={onSubmitHandler}>
 				<input
 					type='text'
 					placeholder='Description'
 					autoFocus
-					value={form.description}
+					value={description}
 					onChange={onDescriptionChange}
 				/>
-
-				<input type='text' placeholder='Amount' value={form.amount} onChange={onNumChange} />
-
+				<input
+					type='text'
+					placeholder='Amount'
+					value={amount}
+					onChange={onAmountChange}
+				/>
 				<SingleDatePicker
-					date={form.createdAt}
+					date={createdAt}
 					onDateChange={onDateChange}
-					focused={form.focusedCalendar}
+					focused={focusedCalendar}
 					onFocusChange={onFocusCalendar}
 					numberOfMonths={1}
-					isOutsideRange={()=>{false}}
-
+					isOutsideRange={() => false}
 				/>
-
-				<textarea placeholder='write a note (optional)' value={form.note}
-					onChange={onNoteChange}   ></textarea>
-				<button>Submit</button>
+				<textarea
+					placeholder='write a note (optional)'
+					value={note}
+					onChange={onNoteChange}
+				></textarea>
+				<button> Add Expense </button>
 			</form>
 		</div>
 	);
 };
-
-
 
 export default ExpenseForm;
