@@ -9,7 +9,7 @@ import getVisibleExpenses from './selectors/expenses';
 import 'normalize.css/normalize.css';
 import './styles/styles.scss';
 import ExpenseList from './components/ExpenseList';
-// import ExpenseList from './components/ExpenseList';
+import 'react-dates/lib/css/_datepicker.css';
 
 const store = configureStore();
 
@@ -21,8 +21,6 @@ store.dispatch(addExpense({ description: 'Gas bill', amount: 100 }));
 const state = store.getState();
 const visibleExpenses = getVisibleExpenses(state.expenses, state.filters);
 console.log(visibleExpenses);
-
-
 
 const jsx = (
 	<div>

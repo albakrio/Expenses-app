@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render Header correctly 1`] = `
+<header>
+  <h1>
+    Expensify
+  </h1>
+  <Link
+    className="is-active"
+    exact={true}
+    to="/"
+  >
+    Dashboard
+  </Link>
+  <Link
+    className="is-active"
+    to="/create"
+  >
+    Create Expense
+  </Link>
+  <Link
+    className="is-active"
+    to="/help"
+  >
+    Help
+  </Link>
+</header>
+`;

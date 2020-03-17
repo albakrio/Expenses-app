@@ -1,8 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { setTextFilter, sortByDate, sortByAmount } from '../actions/filters';
+import {
+	setTextFilter,
+	sortByDate,
+	sortByAmount,
+	setStartDate,
+	setEndDate
+} from '../actions/filters';
+import moment from 'moment';
+import 'react-dates/initialize';
+
+import { DateRangePicker } from 'react-dates';
+
 
 const ExpenseListFilters = (props) => {
+	//console.log(props);
+	const [calendarFocused, setCalendarFocused] = useState(null);
+	//console.log(calendarFocused);
+
+	const onDatesChange = ({ startDate, endDate }) => {
+		props.dispatch(setStartDate(startDate));
+
+		props.dispatch(setEndDate(endDate));
+	};
+
+	const onFocusChange = ({ focusedInput }) => {
+		setCalendarFocused(focusedInput);
+	};
 	return (
 		<div>
 			<input
@@ -25,6 +49,16 @@ const ExpenseListFilters = (props) => {
 				<option value='date'>Date</option>
 				<option value='amount'>Amount</option>
 			</select>
+
+			<DateRangePicker
+				startDate={props.filters.startDate} // momentPropTypes.momentObj or null,
+				startDateId='start' // PropTypes.string.isRequired,
+				endDate={props.filters.endDate} // momentPropTypes.momentObj or null,
+				endDateId='end' // PropTypes.string.isRequired,
+				onDatesChange={onDatesChange}
+				focusedInput={calendarFocused} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
+				onFocusChange={onFocusChange} // PropTypes.func.isRequired,
+			/>
 		</div>
 	);
 };

@@ -2,15 +2,20 @@ import React, { useState } from 'react';
 import moment from 'moment';
 import 'react-dates/initialize';
 import { SingleDatePicker } from 'react-dates';
-import 'react-dates/lib/css/_datepicker.css';
 
-const ExpenseForm = () => {
-	const [description, setDescription] = useState('');
-	const [note, setNote] = useState('');
-	const [amount, setAmount] = useState('');
-	const [createdAt, setCreatedAt] = useState(moment());
+const ExpenseForm = (props) => {
+	const [description, setDescription] = useState(
+		props.expense ? props.expense.description : ''
+	);
+	const [note, setNote] = useState(props.expense ? props.expense.note : '');
+	const [amount, setAmount] = useState(
+		props.expense ? (props.expense.amount / 100).toString() : ''
+	);
+	const [createdAt, setCreatedAt] = useState(
+		props.expense ? moment(props.expense.createdAt) : moment()
+	);
 	const [focusedCalendar, setFocusedCalendar] = useState(false);
-	const [error, setError] = useState('')
+	const [error, setError] = useState('');
 
 	const onDescriptionChange = (e) => {
 		const newDescription = e.target.value;
@@ -39,20 +44,24 @@ const ExpenseForm = () => {
 		setFocusedCalendar(focused);
 	};
 
-	const onSubmitHandler = (e)=>{
-		e.preventDefault()
-		if(!description || !amount){
-			setError('Please provide description and amount!')
+	const onSubmitHandler = (e) => {
+		e.preventDefault();
+		if (!description || !amount) {
+			setError('Please provide description and amount!');
 		} else {
-			setError('')
-			console.log('submitted')
-
+			setError('');
+			props.onSubmitResult({
+				description,
+				amount: parseFloat(amount * 10) * 100,
+				note,
+				createdAt: createdAt.valueOf()
+			});
 		}
-	}
+	};
 
 	return (
 		<div>
-		  {error && <p>{error}</p>}
+			{error && <p>{error}</p>}
 			<form onSubmit={onSubmitHandler}>
 				<input
 					type='text'
