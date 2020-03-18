@@ -24,23 +24,23 @@ test('should render for invalid form submission', () => {
 	expect(wrapper).toMatchSnapshot();
 });
 
-test('should set description on input change', () => {
-	const value = 'new description';
-	const wrapper = shallow(<ExpenseForm />);
+// test('should set description on input change', () => {
+// 	const value = 'new description';
+// 	const wrapper = shallow(<ExpenseForm />);
 
-	wrapper
-		.find('input')
-		.at(0)
-		.simulate('change', {
-			target: { value }
-		});
-	expect(
-		wrapper
-			.find('input[onChange="onDescriptionChange"]')
-			.text()
-			.toBe('new description')
-	);
-});
+// 	wrapper
+// 		.find('input')
+// 		.at(0)
+// 		.simulate('change', {
+// 			target: { value }
+// 		});
+// 	expect(
+// 		wrapper
+// 			.find('input[onChange="onDescriptionChange"]')
+// 			.text()
+// 			.toBe('new description')
+// 	);
+// });
 
 // test('should render error hook value', () => {
 // 	const hook = error;
