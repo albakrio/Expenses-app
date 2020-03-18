@@ -12,7 +12,7 @@ import ExpenseList from './components/ExpenseList';
 import 'react-dates/lib/css/_datepicker.css';
 
 const store = configureStore();
-
+console.log('TESTING!!!!');
 const jsx = (
 	<div>
 		<Provider store={store}>
