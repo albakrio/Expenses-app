@@ -7,7 +7,6 @@ exports[`should render Header correctly 1`] = `
   </h1>
   <Link
     className="is-active"
-    exact={true}
     to="/"
   >
     Dashboard
@@ -18,11 +17,10 @@ exports[`should render Header correctly 1`] = `
   >
     Create Expense
   </Link>
-  <Link
-    className="is-active"
-    to="/help"
+  <button
+    onClick={[Function]}
   >
-    Help
-  </Link>
+    Log out
+  </button>
 </header>
 `;
