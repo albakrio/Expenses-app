@@ -7,7 +7,7 @@ exports[`should render Header correctly 1`] = `
   </h1>
   <Link
     className="is-active"
-    to="/"
+    to="/dashboard"
   >
     Dashboard
   </Link>

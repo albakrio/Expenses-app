@@ -6,7 +6,7 @@ import {connect} from 'react-redux'
 export const Header = ({startLogout}) => (
 	<header>
 		<h1>Expensify</h1>
-		<Link to='/'  className='is-active'>
+		<Link to='/dashboard'  className='is-active'>
 			Dashboard
 		</Link>
 		<Link to='/create' className='is-active'>
