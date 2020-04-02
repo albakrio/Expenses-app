@@ -60,38 +60,41 @@ const ExpenseForm = (props) => {
 	};
 
 	return (
-		<div>
-			{error && <p>{error}</p>}
-			<form onSubmit={onSubmitHandler}>
-				<input
-					type='text'
-					placeholder='Description'
-					autoFocus
-					value={description}
-					onChange={onDescriptionChange}
-				/>
-				<input
-					type='text'
-					placeholder='Amount'
-					value={amount}
-					onChange={onAmountChange}
-				/>
-				<SingleDatePicker
-					date={createdAt}
-					onDateChange={onDateChange}
-					focused={focusedCalendar}
-					onFocusChange={onFocusCalendar}
-					numberOfMonths={1}
-					isOutsideRange={() => false}
-				/>
-				<textarea
-					placeholder='write a note (optional)'
-					value={note}
-					onChange={onNoteChange}
-				></textarea>
-				<button> Add Expense </button>
-			</form>
-		</div>
+		<form className='form' onSubmit={onSubmitHandler}>
+			{error && <p className='form__error'>{error}</p>}
+			<input
+				type='text'
+				className='text-input'
+				placeholder='Description'
+				autoFocus
+				value={description}
+				onChange={onDescriptionChange}
+			/>
+			<input
+				type='text'
+				className='text-input'
+				placeholder='Amount'
+				value={amount}
+				onChange={onAmountChange}
+			/>
+			<SingleDatePicker
+				date={createdAt}
+				onDateChange={onDateChange}
+				focused={focusedCalendar}
+				onFocusChange={onFocusCalendar}
+				numberOfMonths={1}
+				isOutsideRange={() => false}
+			/>
+			<textarea
+				className='text-area'
+				placeholder='write a note (optional)'
+				value={note}
+				onChange={onNoteChange}
+			></textarea>
+			<div>
+				<button className='button'> Save expense </button>
+			</div>
+		</form>
 	);
 };
 

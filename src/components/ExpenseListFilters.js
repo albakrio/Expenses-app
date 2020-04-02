@@ -12,7 +12,6 @@ import 'react-dates/initialize';
 
 import { DateRangePicker } from 'react-dates';
 
-
 const ExpenseListFilters = (props) => {
 	//console.log(props);
 	const [calendarFocused, setCalendarFocused] = useState(null);
@@ -28,37 +27,47 @@ const ExpenseListFilters = (props) => {
 		setCalendarFocused(focusedInput);
 	};
 	return (
-		<div>
-			<input
-				type='text'
-				value={props.filters.text}
-				onChange={(e) => {
-					props.dispatch(setTextFilter(e.target.value));
-				}}
-			/>
-			<select
-				value={props.filters.sortBy}
-				onChange={(e) => {
-					if (e.target.value === 'date') {
-						props.dispatch(sortByDate());
-					} else if (e.target.value === 'amount') {
-						props.dispatch(sortByAmount());
-					}
-				}}
-			>
-				<option value='date'>Date</option>
-				<option value='amount'>Amount</option>
-			</select>
-
-			<DateRangePicker
-				startDate={props.filters.startDate} // momentPropTypes.momentObj or null,
-				startDateId='start' // PropTypes.string.isRequired,
-				endDate={props.filters.endDate} // momentPropTypes.momentObj or null,
-				endDateId='end' // PropTypes.string.isRequired,
-				onDatesChange={onDatesChange}
-				focusedInput={calendarFocused} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
-				onFocusChange={onFocusChange} // PropTypes.func.isRequired,
-			/>
+		<div className="content-container">
+			<div className="input-group">
+				<div className="input-group__item">
+					<input
+						type='text'
+						className="text-input"
+						placeholder="Search expenses"
+						value={props.filters.text}
+						onChange={(e) => {
+							props.dispatch(setTextFilter(e.target.value));
+						}}
+					/>
+				</div>
+				<div className="input-group__item">
+					<select
+					  className="select"
+						value={props.filters.sortBy}
+						onChange={(e) => {
+							if (e.target.value === 'date') {
+								props.dispatch(sortByDate());
+							} else if (e.target.value === 'amount') {
+								props.dispatch(sortByAmount());
+							}
+						}}
+					>
+						<option value='date'>Date</option>
+						<option value='amount'>Amount</option>
+					</select>
+				</div>
+				<div className="input-group__item">
+					<DateRangePicker
+						startDate={props.filters.startDate} // momentPropTypes.momentObj or null,
+						startDateId='start' // PropTypes.string.isRequired,
+						endDate={props.filters.endDate} // momentPropTypes.momentObj or null,
+						endDateId='end' // PropTypes.string.isRequired,
+						onDatesChange={onDatesChange}
+						focusedInput={calendarFocused} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
+						onFocusChange={onFocusChange} // PropTypes.func.isRequired,
+					/>
+				</div>
+			</div>
 		</div>
 	);
 };
