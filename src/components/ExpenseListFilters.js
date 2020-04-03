@@ -7,10 +7,10 @@ import {
 	setStartDate,
 	setEndDate
 } from '../actions/filters';
-import moment from 'moment';
-import 'react-dates/initialize';
 
+import 'react-dates/initialize';
 import { DateRangePicker } from 'react-dates';
+import 'react-dates/lib/css/_datepicker.css';
 
 const ExpenseListFilters = (props) => {
 	//console.log(props);
@@ -23,26 +23,27 @@ const ExpenseListFilters = (props) => {
 		props.dispatch(setEndDate(endDate));
 	};
 
-	const onFocusChange = ({ focusedInput }) => {
+	const onFocusChange = (focusedInput) => {
 		setCalendarFocused(focusedInput);
 	};
+
 	return (
-		<div className="content-container">
-			<div className="input-group">
-				<div className="input-group__item">
+		<div className='content-container'>
+			<div className='input-group'>
+				<div className='input-group__item'>
 					<input
 						type='text'
-						className="text-input"
-						placeholder="Search expenses"
+						className='text-input'
+						placeholder='Search expenses'
 						value={props.filters.text}
 						onChange={(e) => {
 							props.dispatch(setTextFilter(e.target.value));
 						}}
 					/>
 				</div>
-				<div className="input-group__item">
+				<div className='input-group__item'>
 					<select
-					  className="select"
+						className='select'
 						value={props.filters.sortBy}
 						onChange={(e) => {
 							if (e.target.value === 'date') {
@@ -56,15 +57,18 @@ const ExpenseListFilters = (props) => {
 						<option value='amount'>Amount</option>
 					</select>
 				</div>
-				<div className="input-group__item">
+				<div className='input-group__item'>
 					<DateRangePicker
 						startDate={props.filters.startDate} // momentPropTypes.momentObj or null,
 						startDateId='start' // PropTypes.string.isRequired,
 						endDate={props.filters.endDate} // momentPropTypes.momentObj or null,
-						endDateId='end' // PropTypes.string.isRequired,
+						endDateId='end'
 						onDatesChange={onDatesChange}
-						focusedInput={calendarFocused} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
-						onFocusChange={onFocusChange} // PropTypes.func.isRequired,
+						focusedInput={calendarFocused}
+						onFocusChange={onFocusChange}
+						showClearDates={true}
+						numberOfMonths={1}
+						isOutsideRange={() => false}
 					/>
 				</div>
 			</div>

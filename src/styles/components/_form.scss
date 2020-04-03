@@ -2,11 +2,11 @@
   display: flex;
   flex-direction: column;
   > * {
-    margin-bottom: $m-size;
+    margin-top:$s-size ;
    }
 }
 
 .form__error {
   font-style: italic;
-  margin-bottom: $m-size;
+  margin: 0 0 $m-size 0;
 }
