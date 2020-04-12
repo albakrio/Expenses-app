@@ -22,9 +22,4 @@ const AddExpensePage = (props) => (
 	</div>
 );
 
-// const mapDispatchToProps = (dispatch)=>{
-// 	startAddExpense: (expense) => dispatch(startAddExpense(expense))
-
-// }
-
 export default connect()(AddExpensePage);

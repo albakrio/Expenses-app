@@ -1,5 +1,5 @@
 {
-	"name": "expensify",
+	"name": "expenses-app",
 	"version": "1.0.0",
 	"main": "./src/app.js",
 	"author": "Omar Al-Bakri",

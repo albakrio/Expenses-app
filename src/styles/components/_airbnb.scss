@@ -1,0 +1,20 @@
+.SingleDatePicker {
+  border: 1px solid #cacccd;
+}
+
+.SingleDatePickerInput__withBorder {
+  margin: 1px;
+}
+
+.SingleDatePickerInput__withBorder {
+  margin: 2px;
+  border: none;
+}
+
+.SingleDatePickerInput {
+  width: 99%;
+
+  .DateInput {
+    width: 100%;
+  }
+}
